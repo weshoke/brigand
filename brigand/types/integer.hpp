@@ -11,6 +11,11 @@
 
 namespace brigand
 {
+  template<class T>
+  struct int_
+  : public std::integral_constant<typename T::value_type, T::value>
+  {};
+
   template <std::int8_t V>
   using int8_t = std::integral_constant<std::int8_t, V>;
 
