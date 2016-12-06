@@ -8,6 +8,7 @@
 
 #include <brigand/algorithms/fold.hpp>
 #include <brigand/functions/eval_if.hpp>
+#include <brigand/functions/if.hpp>
 #include <brigand/functions/lambda/bind.hpp>
 #include <brigand/sequences/has_key.hpp>
 #include <brigand/sequences/set.hpp>
@@ -24,15 +25,15 @@ namespace brigand
       bind<
         list,
         _1,
-        bind<
+		bind<
           type_from,
-          bind<
-            eval_if,
-            bind<has_key, bind<as_set, _1>, _2>,
-            bind<type_, bind<list>>,
-            bind<type_, bind<list, _2>>
-          >
-        >
+			bind<
+			if_,
+			bind<has_key, bind<as_set, _1>, _2>,
+			pin<list<>>,
+			bind<list, _2>
+		  >
+		>
       >
     >
   >;
