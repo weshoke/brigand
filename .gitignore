@@ -27,6 +27,9 @@
 *.out
 *.app
 
+# OSX
+.DS_Store
+
 project
 build
 .idea
