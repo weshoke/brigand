@@ -23,7 +23,7 @@ namespace brigand
 {
     namespace detail
 	{
-		template<class L, class Key>
+        template<class L, class Key>
 		struct group
 		{
 			using keys = brigand::transform<L, Key>;
@@ -39,7 +39,7 @@ namespace brigand
 			using keys_sorted = brigand::transform<key_sorted, bind<front, _1>>;
 			using values_sorted = brigand::transform<key_sorted, bind<back, _1>>;
 			using keys_unique = sort<unique<keys>>;
-			
+
 			using end_idx = brigand::transform<
 				keys_unique,
 				bind<
@@ -68,8 +68,14 @@ namespace brigand
 				>
 			>;
 		};
+
+        template<class Key>
+		struct group<brigand::list<>, Key>
+        {
+            using type = brigand::list<>;
+        };
 	}
-	
+
 	template<class L, class Key = _1>
 	using group = type_from<detail::group<L, Key>>;
 }
